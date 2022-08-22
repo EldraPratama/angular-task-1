@@ -19,17 +19,19 @@ export class ListComponent implements OnInit {
     }
 
     deleteUser(id: string) {
-        const user = this.users.find(x => x.id === id);
-        user.isDeleting = true;
-        this.accountService.delete(id)
-            .pipe(first())
-            // .subscribe(() => this.users = this.users.filter(x => x.id !== id));
-            .subscribe({
-                next: () => {
-                    this.users = this.users.filter(x => x.id !== id)
-                    this.alertService.clear()
-                    this.alertService.success('Delete successfully', { keepAfterRouteChange: false });
-                }
-            });
+        if(confirm("Do you want to delete this data ?")){
+            const user = this.users.find(x => x.id === id);
+            user.isDeleting = true;
+            this.accountService.delete(id)
+                .pipe(first())
+                // .subscribe(() => this.users = this.users.filter(x => x.id !== id));
+                .subscribe({
+                    next: () => {
+                        this.users = this.users.filter(x => x.id !== id)
+                        this.alertService.clear()
+                        this.alertService.success('Delete successfully', { keepAfterRouteChange: false });
+                    }
+                });
+        }
     }
 }

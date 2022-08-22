@@ -60,10 +60,10 @@ export class TournamentService {
             }));
     }
 
-    delete(id: string) {
+    delete(id: string) { 
         return this.http.delete(`${environment.apiUrl}/tournament/${id}`)
-            .pipe(map(x => {
-                return x;
-            }));
+        .pipe(map(x => {
+            return x;
+        }));
     }
 }

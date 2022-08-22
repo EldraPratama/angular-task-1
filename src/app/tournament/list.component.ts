@@ -20,17 +20,20 @@ export class ListComponent implements OnInit {
     }
 
     deleteTournament(id: string) {
-        const tournament = this.tournaments.find(x => x.id === id);
-        tournament.isDeleting = true;
-        this.tournamentService.delete(id)
-            .pipe(first())
-            // .subscribe(() => this.tournaments = this.tournaments.filter(x => x.id !== id));
-            .subscribe({
-                next: () => {
-                    this.tournaments = this.tournaments.filter(x => x.id !== id)
-                    this.alertService.clear()
-                    this.alertService.success('Delete successfully', { keepAfterRouteChange: false });
-                }
-            });
+        //delete data when klik ok when confirm
+        if(confirm("Do you want to delete this data ?")){
+            const tournament = this.tournaments.find(x => x.id === id);
+            tournament.isDeleting = true;
+            this.tournamentService.delete(id)
+                .pipe(first())
+                // .subscribe(() => this.tournaments = this.tournaments.filter(x => x.id !== id));
+                .subscribe({
+                    next: () => {
+                        this.tournaments = this.tournaments.filter(x => x.id !== id)
+                        this.alertService.clear()
+                        this.alertService.success('Delete successfully', { keepAfterRouteChange: false });
+                    }
+                });
+        }
     }
 }

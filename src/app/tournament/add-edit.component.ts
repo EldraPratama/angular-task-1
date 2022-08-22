@@ -25,12 +25,6 @@ export class AddEditComponent implements OnInit {
     ngOnInit() {
         this.id = this.route.snapshot.params['id'];
         this.isAddMode = !this.id;
-        
-        // password not required in edit mode
-        // const passwordValidators = [Validators.minLength(6)];
-        // if (this.isAddMode) {
-        //     passwordValidators.push(Validators.required);
-        // }
 
         this.form = this.formBuilder.group({
             name : ['', Validators.required],
@@ -39,6 +33,7 @@ export class AddEditComponent implements OnInit {
             prize: ['', Validators.required]
         });
 
+        //detail data
         if (!this.isAddMode) {
             
             this.tournamentService.getById(this.id)
@@ -85,7 +80,6 @@ export class AddEditComponent implements OnInit {
     }
 
     private updateTournament() {
-        console.log(this.id)
         this.tournamentService.update(this.id, this.form.value)
             .pipe(first())
             .subscribe({
