@@ -2,13 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 
 // import { AccountService } from '../_services';
-import { TournamentService } from '../_services';
+import { TournamentService, AlertService } from '../_services';
 
 @Component({ templateUrl: 'list.component.html' })
 export class ListComponent implements OnInit {
     tournaments = null;
 
-    constructor(private tournamentService: TournamentService) {}
+    constructor(
+        private tournamentService: TournamentService,
+        private alertService: AlertService
+    ) {}
 
     ngOnInit() {
         this.tournamentService.getAll()
@@ -21,6 +24,13 @@ export class ListComponent implements OnInit {
         tournament.isDeleting = true;
         this.tournamentService.delete(id)
             .pipe(first())
-            .subscribe(() => this.tournaments = this.tournaments.filter(x => x.id !== id));
+            // .subscribe(() => this.tournaments = this.tournaments.filter(x => x.id !== id));
+            .subscribe({
+                next: () => {
+                    this.tournaments = this.tournaments.filter(x => x.id !== id)
+                    this.alertService.success('Delete successfully', { keepAfterRouteChange: true });
+                    // this.router.navigate(['../'], { relativeTo: this.route });
+                }
+            });
     }
 }

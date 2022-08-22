@@ -39,6 +39,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getTournamentById();
                 case url.match(/\/tournament\/\d+$/) && method === 'PUT':
                     return updateTournament();
+                case url.match(/\/tournament\/\d+$/) && method === 'DELETE':
+                    return deleteTournament();
                 default:
                     // pass through any requests not handled above
                     return next.handle(request);
@@ -108,6 +110,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok();
         }
 
+        // Tournament
         function create() {
             const tournament = body
             console.log(tournament)
@@ -149,6 +152,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             Object.assign(tournament, params);
             localStorage.setItem(tournamentsKey, JSON.stringify(tournaments));
 
+            return ok();
+        }
+
+        function deleteTournament() {
+            if (!isLoggedIn()) return unauthorized();
+
+            tournaments = tournaments.filter(x => x.id !== idFromUrl());
+            localStorage.setItem(tournamentsKey, JSON.stringify(tournaments));
             return ok();
         }
 
