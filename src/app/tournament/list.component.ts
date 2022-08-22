@@ -28,8 +28,8 @@ export class ListComponent implements OnInit {
             .subscribe({
                 next: () => {
                     this.tournaments = this.tournaments.filter(x => x.id !== id)
-                    this.alertService.success('Delete successfully', { keepAfterRouteChange: true });
-                    // this.router.navigate(['../'], { relativeTo: this.route });
+                    this.alertService.clear()
+                    this.alertService.success('Delete successfully', { keepAfterRouteChange: false });
                 }
             });
     }
