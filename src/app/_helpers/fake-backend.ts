@@ -134,7 +134,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (!isLoggedIn()) return unauthorized();
 
             const tournament = tournaments.find(x => x.id === idFromUrl());
+            console.log(tournament);
             return ok(tournamentDetails(tournament));
+            // if( typeof(tournament) == "undefined"){
+            //     console.log('true')
+            // }else{
+            // }
         }
 
         function updateTournament() {

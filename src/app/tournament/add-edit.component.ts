@@ -39,6 +39,7 @@ export class AddEditComponent implements OnInit {
             this.tournamentService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => this.form.patchValue(x));
+                   
         }
     }
 

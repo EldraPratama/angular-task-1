@@ -11,6 +11,7 @@
         </tr>
     </thead>
     <tbody>
+        
         <tr *ngFor="let tournament of tournaments">
             <td>{{tournament.name}}</td>
             <td>{{tournament.description}}</td>
@@ -24,10 +25,18 @@
                 </button>
             </td>
         </tr>
+
+        <tr *ngIf="tournaments.length == 0">
+            <td colspan="5" class="text-center">
+                <b>Tournament data not available</b>
+            </td>
+        </tr>
+
         <tr *ngIf="!tournaments">
-            <td colspan="4" class="text-center">
+            <td colspan="5" class="text-center">
                 <span class="spinner-border spinner-border-lg align-center"></span>
             </td>
         </tr>
+
     </tbody>
 </table>
