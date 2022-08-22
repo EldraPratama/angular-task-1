@@ -144,9 +144,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             let tournament = tournaments.find(x => x.id === idFromUrl());
 
             // only update password if entered
-            if (!params.password) {
-                delete params.password;
-            }
+            // if (!params.password) {
+            //     delete params.password;
+            // }
 
             // update and save tournament
             Object.assign(tournament, params);

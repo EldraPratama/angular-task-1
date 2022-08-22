@@ -53,21 +53,12 @@ export class TournamentService {
         return this.http.get<Tournament>(`${environment.apiUrl}/tournament/${id}`);
     }
 
-    // update(id, params) {
-    //     return this.http.put(`${environment.apiUrl}/tournament/${id}`, params)
-    //         .pipe(map(x => {
-    //             // update stored user if the logged in user updated their own record
-    //             if (id == this.userValue.id) {
-    //                 // update local storage
-    //                 const user = { ...this.userValue, ...params };
-    //                 localStorage.setItem('user', JSON.stringify(user));
-
-    //                 // publish updated user to subscribers
-    //                 this.userSubject.next(user);
-    //             }
-    //             return x;
-    //         }));
-    // }
+    update(id, params) {
+        return this.http.put(`${environment.apiUrl}/tournament/${id}`, params)
+            .pipe(map(x => {
+                return x;
+            }));
+    }
 
     delete(id: string) {
         return this.http.delete(`${environment.apiUrl}/tournament/${id}`)

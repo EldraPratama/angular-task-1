@@ -65,7 +65,7 @@ export class AddEditComponent implements OnInit {
         if (this.isAddMode) {
             this.createTournament();
         } else {
-            // this.updateTournament();
+            this.updateTournament();
         }
     }
 
@@ -84,18 +84,19 @@ export class AddEditComponent implements OnInit {
             });
     }
 
-    // private updateUser() {
-    //     this.tournamentService.update(this.id, this.form.value)
-    //         .pipe(first())
-    //         .subscribe({
-    //             next: () => {
-    //                 this.alertService.success('Update successful', { keepAfterRouteChange: true });
-    //                 this.router.navigate(['../../'], { relativeTo: this.route });
-    //             },
-    //             error: error => {
-    //                 this.alertService.error(error);
-    //                 this.loading = false;
-    //             }
-    //         });
-    // }
+    private updateTournament() {
+        console.log(this.id)
+        this.tournamentService.update(this.id, this.form.value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    this.alertService.success('Update successful', { keepAfterRouteChange: true });
+                    this.router.navigate(['../../'], { relativeTo: this.route });
+                },
+                error: error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                }
+            });
+    }
 }
