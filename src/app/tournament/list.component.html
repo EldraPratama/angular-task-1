@@ -26,17 +26,19 @@
             </td>
         </tr>
 
+        <tr *ngIf="!tournaments">
+            <td colspan="5" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+
         <tr *ngIf="tournaments.length == 0">
             <td colspan="5" class="text-center">
                 <b>Tournament data not available</b>
             </td>
         </tr>
 
-        <tr *ngIf="!tournaments">
-            <td colspan="5" class="text-center">
-                <span class="spinner-border spinner-border-lg align-center"></span>
-            </td>
-        </tr>
+
 
     </tbody>
 </table>
