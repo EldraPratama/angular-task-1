@@ -1,0 +1,33 @@
+<h1>Tournaments</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Tournament</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 30%">Description</th>
+            <th style="width: 20%">Participant</th>
+            <th style="width: 20%">Prize</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tournament of tournaments">
+            <td>{{tournament.name}}</td>
+            <td>{{tournament.description}}</td>
+            <td>{{tournament.participant}}</td>
+            <td>{{tournament.prize}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{tournament.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deleteTournament(tournament.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="tournament.isDeleting">
+                    <span *ngIf="tournament.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!tournament.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!tournaments">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
