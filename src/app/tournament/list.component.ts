@@ -17,8 +17,8 @@ export class ListComponent implements OnInit {
     }
 
     deleteTournament(id: string) {
-        const user = this.tournaments.find(x => x.id === id);
-        user.isDeleting = true;
+        const tournament = this.tournaments.find(x => x.id === id);
+        tournament.isDeleting = true;
         this.tournamentService.delete(id)
             .pipe(first())
             .subscribe(() => this.tournaments = this.tournaments.filter(x => x.id !== id));
